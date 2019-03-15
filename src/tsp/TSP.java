@@ -16,12 +16,13 @@ public class TSP {
 //      RefineryUtilities.centerFrameOnScreen( chart );          
 //      chart.setVisible( true ); 
         Cidade city = new Cidade();
-//        double[][] populacaoInicial = city.geraPopulacao();
-//        for(int i = 10; i < 10; i++){
-//            for(int j = 0; j < 100; j++){
-//                System.out.println(populacaoInicial[i][j]);
-//            }
-//        }
+        int[][] populacaoInicial = city.geraPopulacao();
+        for(int i = 0; i < 100; i++){
+            for(int j = 0; j < 2; j++){
+                System.out.print(populacaoInicial[i][j] + " ");
+            }
+            System.out.println();
+        }
     }
     
     
