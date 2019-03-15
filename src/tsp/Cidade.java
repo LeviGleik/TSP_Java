@@ -28,8 +28,8 @@ public class Cidade {
         }
         return cidadeN;
     }
-    public double distanciaCidade(int pos, int pos1){
-        return Math.sqrt(Math.pow((this.x[pos] - this.x[pos1]), 2) + Math.pow((this.y[pos] - this.y[pos1]), 2));
+    public double distanciaCidade(int[] cidade, int[] cidade2){
+        return Math.sqrt(Math.pow((cidade[0] - cidade2[0]), 2) + Math.pow((cidade[1] - cidade2[1]), 2));
     }
     
     public int[][] geraPopulacao(){
@@ -55,4 +55,10 @@ public class Cidade {
     public boolean contains(final int[] array, final int key) {     
         return ArrayUtils.contains(array, key);
     }
+//    public double aptidao(int[] populacao){
+//        double aptd;
+//        for(int i = 0; i < 100; i++){
+//            aptd = distanciaCidade(populacao, populacao);
+//        }
+//    }
 }
