@@ -19,6 +19,15 @@ public class Cidade {
     public int[] getCidade(int pos){
         return this.xy[pos];
     }
+    public int getTheCity(int [] cidade){
+        int cidadeN = 0;
+        for(int i = 0; i < 100; i++){
+            if(cidade == this.xy[i]){
+                cidadeN = i;
+            }
+        }
+        return cidadeN;
+    }
     public double distanciaCidade(int pos, int pos1){
         return Math.sqrt(Math.pow((this.x[pos] - this.x[pos1]), 2) + Math.pow((this.y[pos] - this.y[pos1]), 2));
     }

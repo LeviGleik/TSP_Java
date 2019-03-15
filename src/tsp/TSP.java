@@ -23,6 +23,7 @@ public class TSP {
             }
             System.out.println();
         }
+        System.out.println(city.getTheCity(populacaoInicial[0]));
     }
     
     
