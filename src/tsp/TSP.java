@@ -15,17 +15,34 @@ public class TSP {
 //      chart.pack( );          
 //      RefineryUtilities.centerFrameOnScreen( chart );          
 //      chart.setVisible( true ); 
-        Cidade city = new Cidade();
+        Populacao city = new Populacao();
         int[][] populacaoInicial = city.geraPopulacao();
-        for(int i = 0; i < 100; i++){
-            for(int j = 0; j < 2; j++){
-                System.out.print(populacaoInicial[i][j] + " ");
-            }
-            System.out.println();
-        }
-        System.out.println(city.getTheCity(populacaoInicial[0]));
+        double[] aptd = new double[50];            
+        aptd = city.aptidao(populacaoInicial);
+        double aptdAcumulada = 0;
+        
+//        for(int i = 0; i < 50; i++){
+//            for(int j = 0; j < 100; j++){
+//                System.out.print(populacaoInicial[i][j] + " ");
+//            }
+////            aptdAcumulada += aptd[i];
+//            
+////            System.out.println(aptd[i]);
+////            System.out.println("Acumulada: " + aptdAcumulada);
+//            System.out.println(populacaoInicial[i]);
+////
+//        }
+        populacaoInicial = city.roleta(populacaoInicial);
+//        for(int i = 0; i < 50; i++){
+//            for(int j = 0; j < 100; j++){
+//                System.out.print(populacaoInicial[i][j] + " ");
+//            }            
+//            System.out.println(populacaoInicial[i]);
+//            
+//        }
+        
+
+    
     }
-    
-    
     
 }
