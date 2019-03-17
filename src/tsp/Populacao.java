@@ -102,9 +102,12 @@ public class Populacao {
         double[] aptidao = aptidao(populacao);
         double[][] ranges = new double[50][2];
         double aptd = 0;
-        double rol = Math.random();
-        int k = 0;
+        
+        int[][] novaPopulacao = new int[50][100];
+        novaPopulacao[0] = populacao[0];
 
+        double rol;
+        int k = 0;
 
         for (int i = 0; i < 25; i++) {
             for (int j = 0; j < 2; j++) {
@@ -114,34 +117,18 @@ public class Populacao {
             }
             System.out.println();
         }
-//        for (int i = 0; i < 50; i++) {
-//            while((rol < aptd) && (rol >= aptdInicial)){
-//                aptd += aptidao[k];
-//                aptdInicial += aptd;
-//                rol = Math.random();
-//                System.out.println(rol);
-//                k++;
-//            }
-//        }
-        for (int i = 0; i < 25; i++) {
-//            for (int j = 0; j < 100; j++) {
-//                populacao[i][j] = aptidao[k];
-//                k++;
-//            }
-            for (int j = 0; j < 2; j++) {
-                if(rol < ranges[i][j] && rol >= ranges[i][k++]){
-//                    populacao[i][j] = 
+        for(k=0; k < 50;){
+            rol = Math.random();
+            System.out.println("Roleta: " + rol);
+
+            for (int n = 1; n < 50; n++) {
+                
+                if(rol >= ranges[n][0] && rol < ranges[n][1]){
+                    novaPopulacao[k++] = populacao[n];
                 }
             }
         }
-        return populacao;
+        return novaPopulacao;
         
     }
-//    public int range(int[][] ranges){
-//        for (int i = 0; i < 25; i++) {
-//            for (int j = 0; j < 2; j++) {
-//                ranges[i][j] = 
-//            }
-//        }
-//    }
 }

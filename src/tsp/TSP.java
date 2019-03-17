@@ -21,25 +21,29 @@ public class TSP {
         aptd = city.aptidao(populacaoInicial);
         double aptdAcumulada = 0;
         
-//        for(int i = 0; i < 50; i++){
-//            for(int j = 0; j < 100; j++){
-//                System.out.print(populacaoInicial[i][j] + " ");
-//            }
+        for(int i = 0; i < 50; i++){
+            for(int j = 0; j < 100; j++){
+                System.out.print(populacaoInicial[i][j] + " ");
+            }
+            System.out.println();
+
 ////            aptdAcumulada += aptd[i];
 //            
 ////            System.out.println(aptd[i]);
 ////            System.out.println("Acumulada: " + aptdAcumulada);
 //            System.out.println(populacaoInicial[i]);
 ////
-//        }
+        }
+        System.out.println();
+
         populacaoInicial = city.roleta(populacaoInicial);
-//        for(int i = 0; i < 50; i++){
-//            for(int j = 0; j < 100; j++){
-//                System.out.print(populacaoInicial[i][j] + " ");
-//            }            
-//            System.out.println(populacaoInicial[i]);
+        for(int i = 0; i < 50; i++){
+            for(int j = 0; j < 100; j++){
+                System.out.print(populacaoInicial[i][j] + " ");
+            }            
+            System.out.println();
 //            
-//        }
+        }
         
 
     
