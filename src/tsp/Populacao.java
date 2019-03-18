@@ -125,31 +125,48 @@ public class Populacao {
         }
         return novaPopulacao;        
     }
-//    public double[][] combinacao(int[][] populacao){
-//        int[][] populacaoAux1 = new int[50][100];
-//        int[][] populacaoAux2 = new int[50][100];
-//        int j1Pos;
-//        int j2Pos;
-//        int i1Pos;
-//        int i2Pos;
-//        for(int i = 0; i < 50; i++){
-//            j1Pos = (int) (Math.random() * 99);
-//            i1Pos = (int) (Math.random() * 49);
-//            i2Pos = (int) (Math.random() * 49);
-//            j2Pos = (int) (Math.random() * 99);
-//            if(i1Pos != i2Pos){
-//                for(int j = 0; j < 100; j++){
-//                    if(j1Pos > j2Pos){
-//                        while(j >= j1Pos && j < j2Pos+1){
-//                            populacaoAux1[i1Pos][j] = populacao[i2Pos][j];
-//                        }
-//                    }
-//                }
-//            } else{
-//                i1Pos = (int) (Math.random() * 49);
-//                i2Pos = (int) (Math.random() * 49);
-//                i--;
-//            }
-//        }
-//    }
+    public int[][] combinacao(int[][] populacao){
+        int[][] populacaoAux1 = new int[50][100];
+        int[][] populacaoAux2 = new int[50][100];
+        int[][] novaPopulacao = new int[50][100];
+        int j1Pos;
+        int j2Pos;
+        int i1Pos;
+        int i2Pos;
+        int k = 0;
+        for(int i = 0; i < 50; i++, k++){
+            j1Pos = (int) (Math.random() * 99);
+            i1Pos = (int) (Math.random() * 49);
+            i2Pos = (int) (Math.random() * 49);
+            j2Pos = (int) (Math.random() * 99);
+            System.out.println("j1: " + j1Pos);
+            System.out.println("j2: " + j2Pos);
+            System.out.println("i1: " + i1Pos);
+            System.out.println("i2: " + i2Pos);
+
+            if(i1Pos != i2Pos){
+                for(int j = 0; j < 100; j++){
+                    if(j1Pos > j2Pos){
+                        if(j <= j1Pos && j > j2Pos+1){
+                            populacaoAux1[k][j] = populacao[i2Pos][j];
+                            populacaoAux2[i2Pos][j] = populacao[i1Pos][j];
+                        }
+                    } else if(j2Pos > j1Pos){
+                        if(j >= j1Pos && j < j2Pos+1){
+                            populacaoAux1[k][j] = populacao[i2Pos][j];
+                            populacaoAux2[i1Pos][j] = populacao[i1Pos][j];
+                        }
+                    } else{
+                        j1Pos = (int) (Math.random() * 99);
+                        j2Pos = (int) (Math.random() * 99);
+                    }
+                }
+                
+            } else{
+                i1Pos = (int) (Math.random() * 49);
+                i2Pos = (int) (Math.random() * 49);
+            }
+        }
+        return populacaoAux1;
+    }
 }
