@@ -30,8 +30,7 @@ public class Populacao {
         return Math.sqrt(Math.pow((this.xy[cidade][0] - this.xy[cidade2][0]), 2) + Math.pow((this.xy[cidade][1] - this.xy[cidade2][1]), 2));
     }
     
-    public int[] geraRota(){
-        
+    public int[] geraRota(){        
         int pos = (int)(Math.random()*100);
         ArrayList<Integer> prevPos = new ArrayList();
         int[] rota = new int[100];
@@ -113,14 +112,10 @@ public class Populacao {
             for (int j = 0; j < 2; j++) {
                     aptd += aptidao[k++];
                     ranges[i][j] = aptd;
-                System.out.println(ranges[i][j]);
             }
-            System.out.println();
         }
         for(k=0; k < 50;){
             rol = Math.random();
-            System.out.println("Roleta: " + rol);
-
             for (int n = 1; n < 50; n++) {
                 
                 if(rol >= ranges[n][0] && rol < ranges[n][1]){
@@ -128,7 +123,33 @@ public class Populacao {
                 }
             }
         }
-        return novaPopulacao;
-        
+        return novaPopulacao;        
     }
+//    public double[][] combinacao(int[][] populacao){
+//        int[][] populacaoAux1 = new int[50][100];
+//        int[][] populacaoAux2 = new int[50][100];
+//        int j1Pos;
+//        int j2Pos;
+//        int i1Pos;
+//        int i2Pos;
+//        for(int i = 0; i < 50; i++){
+//            j1Pos = (int) (Math.random() * 99);
+//            i1Pos = (int) (Math.random() * 49);
+//            i2Pos = (int) (Math.random() * 49);
+//            j2Pos = (int) (Math.random() * 99);
+//            if(i1Pos != i2Pos){
+//                for(int j = 0; j < 100; j++){
+//                    if(j1Pos > j2Pos){
+//                        while(j >= j1Pos && j < j2Pos+1){
+//                            populacaoAux1[i1Pos][j] = populacao[i2Pos][j];
+//                        }
+//                    }
+//                }
+//            } else{
+//                i1Pos = (int) (Math.random() * 49);
+//                i2Pos = (int) (Math.random() * 49);
+//                i--;
+//            }
+//        }
+//    }
 }
