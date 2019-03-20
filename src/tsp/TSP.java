@@ -17,36 +17,35 @@ public class TSP {
 //      chart.setVisible( true ); 
         Populacao city = new Populacao();
         int[][] populacaoInicial = city.geraPopulacao();
-        double[] aptd = new double[50];            
-        aptd = city.aptidao(populacaoInicial);
-        double aptdAcumulada = 0;
-        
-        for(int i = 0; i < 50; i++){
-            for(int j = 0; j < 100; j++){
-                System.out.print(populacaoInicial[i][j] + " ");
-            }
-            System.out.println();
+        double aptd = city.somaDistanciasTotal(populacaoInicial);
+        System.out.println(aptd);
 
-////            aptdAcumulada += aptd[i];
-//            
-////            System.out.println(aptd[i]);
-////            System.out.println("Acumulada: " + aptdAcumulada);
-//            System.out.println(populacaoInicial[i]);
-////
-        }
-        System.out.println();
+                    
+//        for(int i = 0; i < 50; i++){
+//            for(int j = 0; j < 100; j++){
+//                System.out.print(populacaoInicial[i][j] + " ");
+//            }
+//            System.out.println();
+//
+//////            aptdAcumulada += aptd[i];
+////            
+//////            System.out.println(aptd[i]);
+//////            System.out.println("Acumulada: " + aptdAcumulada);
+////            System.out.println(populacaoInicial[i]);
+//////
+//        }
 
-        populacaoInicial = city.roleta(populacaoInicial);
-        for(int i = 0; i < 50; i++){
-            for(int j = 0; j < 100; j++){
-                System.out.print(populacaoInicial[i][j] + " ");
-            }            
-            System.out.println();
-//            
-        }
-        
+        populacaoInicial = city.populacaoIniciar(populacaoInicial);
+        aptd = city.somaDistanciasTotal(populacaoInicial);
+        System.out.println(aptd);
 
-    
+//        for(int i = 0; i < 50; i++){
+//            for(int j = 0; j < 100; j++){
+//                System.out.print(populacaoInicial[i][j] + " ");
+//            }            
+//            System.out.println();
+////            
+//        }
     }
     
 }

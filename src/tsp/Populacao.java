@@ -5,6 +5,7 @@
  */
 package tsp;
 import java.util.ArrayList;
+import org.apache.commons.lang3.ArrayUtils;
 
 /**
  *
@@ -56,10 +57,9 @@ public class Populacao {
     }
     public double[] somaDistancias(int[][] populacao){
         double[] aptd = new double[50];
-        int k = 1;
         for(int i = 0; i < 50; i++){
-            for(int j = 0; j < 100; j++){
-                aptd[i] += distanciaCidade(populacao[i][j], populacao[i][k]);
+            for(int j = 0; j < 99; j++){
+                aptd[i] += distanciaCidade(populacao[i][j], populacao[i][j+1]);
             }
         }
         return aptd;
@@ -129,44 +129,103 @@ public class Populacao {
         int[][] populacaoAux1 = new int[50][100];
         int[][] populacaoAux2 = new int[50][100];
         int[][] novaPopulacao = new int[50][100];
-        int j1Pos;
-        int j2Pos;
-        int i1Pos;
-        int i2Pos;
+        int[] j1Pos = new int[25];
+        int[] j2Pos = new int[25];
+        int[] i1Pos = new int[25];
+        int[] i2Pos = new int[25];
         int k = 0;
-        for(int i = 0; i < 50; i++, k++){
-            j1Pos = (int) (Math.random() * 99);
-            i1Pos = (int) (Math.random() * 49);
-            i2Pos = (int) (Math.random() * 49);
-            j2Pos = (int) (Math.random() * 99);
-            System.out.println("j1: " + j1Pos);
-            System.out.println("j2: " + j2Pos);
-            System.out.println("i1: " + i1Pos);
-            System.out.println("i2: " + i2Pos);
+        for(int i = 0; i < 25; i++){
+            j1Pos[i] = (int) (Math.random() * 99);
+            j2Pos[i] = (int) (Math.random() * 99);
+            i1Pos[i] = (int) (Math.random() * 49);
+            i2Pos[i] = (int) (Math.random() * 49);
 
-            if(i1Pos != i2Pos){
-                for(int j = 0; j < 100; j++){
-                    if(j1Pos > j2Pos){
-                        if(j <= j1Pos && j > j2Pos+1){
-                            populacaoAux1[k][j] = populacao[i2Pos][j];
-                            populacaoAux2[i2Pos][j] = populacao[i1Pos][j];
-                        }
-                    } else if(j2Pos > j1Pos){
-                        if(j >= j1Pos && j < j2Pos+1){
-                            populacaoAux1[k][j] = populacao[i2Pos][j];
-                            populacaoAux2[i1Pos][j] = populacao[i1Pos][j];
-                        }
-                    } else{
-                        j1Pos = (int) (Math.random() * 99);
-                        j2Pos = (int) (Math.random() * 99);
-                    }
+            while(i1Pos[i] == i2Pos[i]){
+                i1Pos[i] = (int) (Math.random() * 49);
+            }
+            for(int j = 0; j < 100; j++){
+                while(j1Pos[i] >= j2Pos[i]){
+                    j1Pos[i] = (int) (Math.random() * 99);
+                    j2Pos[i] = (int) (Math.random() * 99);
                 }
-                
-            } else{
-                i1Pos = (int) (Math.random() * 49);
-                i2Pos = (int) (Math.random() * 49);
+                if(j >= j1Pos[i] && j < j2Pos[i]){
+                    populacaoAux1[i][j] = populacao[i1Pos[i]][j];
+                    populacaoAux2[i][j] = populacao[i2Pos[i]][j];
+                }
+            }                
+
+        }
+        for (int i = 0; i < 25; i++) {
+            k = 0;
+            for (int j = 0; j < 100;) {
+                if(!(k >= j1Pos[i] && (k < j2Pos[i]))){
+                    if(!contains(populacaoAux1[i], populacao[i2Pos[i]][j])){
+                        populacaoAux1[i][k] = populacao[i2Pos[i]][j];
+                        k++;
+                        j++;
+
+                    } else{
+                        j++;
+                    }                    
+                } else{
+                    k = j2Pos[i];
+                }
             }
         }
-        return populacaoAux1;
+        for (int i = 0; i < 25; i++) {
+            k = 0;
+            for (int j = 0; j < 100;) {
+                if(!(k >= j1Pos[i] && (k < j2Pos[i]))){
+                    if(!contains(populacaoAux2[i], populacao[i1Pos[i]][j])){
+                        populacaoAux2[i][k] = populacao[i1Pos[i]][j];
+                        k++;
+                        j++;
+
+                    } else{
+                        j++;
+                    }                    
+                } else{
+                    k = j2Pos[i];
+                }
+            }
+        }
+        for (int i = 0; i < 50; i++) {
+            for (int j = 0; j < 100; j++) {
+                if(i < 25){
+                    novaPopulacao[i][j] = populacaoAux1[i][j];
+                } else{
+                    novaPopulacao[i][j] = populacaoAux2[i-25][j];
+                }
+            }
+        }
+        return novaPopulacao;
+    }
+    public int[][] mutacao(int[][] populacao){
+        double r = Math.random();
+        int j1 = (int) (Math.random() * 99);
+        int j2 = (int) (Math.random() * 99);
+        int k;
+        for (int i = 0; i < 50; i++) {
+            for (int j = 0; j < 100; j++) {
+                while(j1 == j2){
+                    j1 = (int) (Math.random());
+                }
+                if(r <= 0.05){
+                    k = populacao[i][j1];
+                    populacao[i][j1] = populacao[i][j2];
+                    populacao[i][j2] = k;
+                }
+            }
+        }
+        return populacao;
+    }
+    public int[][] populacaoIniciar(int[][] populacao){
+        populacao = roleta(populacao);
+        populacao = combinacao(populacao);
+        populacao = mutacao(populacao);
+        return populacao;
+    }
+    public boolean contains(final int[] array, final int key) {     
+        return ArrayUtils.contains(array, key);
     }
 }
