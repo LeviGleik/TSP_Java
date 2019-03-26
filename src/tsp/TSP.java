@@ -18,7 +18,7 @@ public class TSP {
         Populacao city = new Populacao();
         Integer[][] populacaoInicial = city.geraPopulacao();
         Integer[][] melhorPopulacao = populacaoInicial;
-//        Integer[] melhorIndividuo = new Integer[100];
+        Integer[] melhorIndividuo = new Integer[100];
         ArrayList<Double> menor = new ArrayList<>();
         ArrayList<Double> mediaAptd = new ArrayList<>();
         menor.add(city.somaDistancias(populacaoInicial)[0]);
@@ -37,7 +37,7 @@ public class TSP {
             for (int j = 0; j < 50; j++) {
                 if((city.somaDistancias(populacaoInicial)[j] >= m)){
                     m = city.somaDistancias(populacaoInicial)[j];
-//                    melhorIndividuo = populacaoInicial[j];
+                    melhorIndividuo = populacaoInicial[j];
                 }
             }
             
@@ -98,7 +98,7 @@ public class TSP {
 ////            
 //        }
         
-        LineChart_AWT chart = new LineChart_AWT("Distância de rotas", "", dataset);
+        LineChart_AWT chart = new LineChart_AWT("Distância de rotas", "", dataset, n, melhorIndividuo);
         chart.pack( );          
         RefineryUtilities.centerFrameOnScreen( chart );          
         chart.setVisible( true ); 
